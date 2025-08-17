@@ -1,0 +1,9 @@
+-- 코드를 입력하세요
+SELECT
+    T.ANIMAL_ID,
+    T.NAME
+FROM
+    ANIMAL_INS T
+WHERE
+    T.INTAKE_CONDITION LIKE 'Sick'
+    
