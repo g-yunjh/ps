@@ -1,0 +1,20 @@
+import sys
+import math
+input = sys.stdin.readline
+
+# a는 구름, b는 바람
+a, b = map(int, input().split())
+d = int(input())
+
+for i in range(d):
+	if i % 2 == 0:
+		amt = math.ceil(a/2)
+		a -= amt
+		b += amt
+	else:
+		amt = math.ceil(b/2)
+		a += amt
+		b -= amt
+
+print(a, b)
+	
