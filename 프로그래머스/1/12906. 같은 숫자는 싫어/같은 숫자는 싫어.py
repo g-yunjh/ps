@@ -1,12 +1,10 @@
 def solution(arr):
     answer = []
     
-    # solution
-    temp = []
-    temp.append(arr[0])
+    tmp = -1
     for i in arr:
-        if i != temp[-1]:
-            temp.append(i)
-    answer = temp
+        if (i != tmp):
+            answer.append(i)
+            tmp = i
     
     return answer
