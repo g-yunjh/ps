@@ -1,9 +1,6 @@
 def solution(num1, num2):
     answer = 0
     
-    # solution
-    answer = num1 / num2
-    answer = answer * 1000
-    answer = int(answer)
+    answer = int((num1 / num2) * 1000)
     
     return answer
