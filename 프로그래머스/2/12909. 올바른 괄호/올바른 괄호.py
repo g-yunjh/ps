@@ -1,20 +1,14 @@
 def solution(s):
-    answer = True
-    
-    # solution
-    if s[0] == ')':
-        return False
-    if s[len(s)-1] == '(':
-        return False
-    stack = 0
+    st = []
     for i in s:
-        if i == "(":
-            stack += 1
+        if (i == "("):
+            st.append(1)
+        elif (not st):
+            return False
         else:
-            stack -= 1
-            if stack < 0:
-                return False
-    if stack != 0:
+            st.pop()
+    if (st):
         return False
-
-    return True
+    else:
+        return True
+        
