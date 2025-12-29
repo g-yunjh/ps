@@ -1,26 +1,19 @@
-from collections import deque
+import math
 
 def solution(progresses, speeds):
+    # 각 작업이 며칠 걸리는지 계산
+    days = [math.ceil((100 - p) / s) for p, s in zip(progresses, speeds)]
+    
     answer = []
+    max_day = days[0]
+    count = 0
     
-    # solution
-    progresses = deque(progresses)
-    speeds = deque(speeds)
-    while True:
-        cnt = 0
-        for i in range(0, len(progresses)):
-            progresses[i] += speeds[i]
-        for i in list(progresses):
-            if i < 100:
-                break
-            else:
-                cnt += 1
-                progresses.popleft()
-                speeds.popleft()
-        if cnt != 0:
-            answer.append(cnt)
-        cnt = 0
-        if len(progresses) == 0:
-            break
-    
+    for day in days:
+        if day <= max_day:
+            count += 1
+        else:
+            answer.append(count)
+            max_day = day
+            count = 1
+    answer.append(count)
     return answer
