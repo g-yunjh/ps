@@ -1,18 +1,18 @@
 import heapq
 
-def solution(s, k):
-    heap = []
-    for i in s:
-        heapq.heappush(heap, i)
-        
+def solution(scoville, k):
+    heapq.heapify(scoville)
     cnt = 0
-    while (heap[0] < k):
-        if (len(heap) == 1):
+    
+    while scoville[0] < k:
+        if len(scoville) < 2:
             return -1
-        else:
-            heapq.heappush(heap, heapq.heappop(heap) + heapq.heappop(heap) * 2)
-            cnt += 1
+        first = heapq.heappop(scoville)
+        second = heapq.heappop(scoville)
         
+        combined = first + second * 2
+        
+        heapq.heappush(scoville, combined)
+        cnt += 1
+    
     return cnt
-        
-            
