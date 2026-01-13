@@ -1,10 +1,11 @@
-def solution(array, commands):
+def solution(array, commands):   
     answer = []
-    for c in commands:
-        tmp = []
-        for i in range(c[0] - 1, c[1]):
-            tmp.append(array[i])
-        tmp.sort()
-        answer.append(tmp[c[2] - 1])
-            
+    for cmd in commands:
+        arr = []
+        for i in range(cmd[0] - 1, cmd[1]):
+            arr.append(array[i])
+        arr.sort()
+        answer.append(arr[cmd[2] - 1])
+    
     return answer
+        
