@@ -1,9 +1,11 @@
-def solution(s):
+def solution(sizes):
     ga = 0
     se = 0
-    for i in range(len(s)):
-        ga = max(ga, max(s[i][0], s[i][1]))
-        se = max(se, min(s[i][0], s[i][1]))
+    for size in sizes:
+        size.sort()
+        if ga < size[0]:
+            ga = size[0]
+        if se < size[1]:
+            se = size[1]
         
     return ga * se
-            
