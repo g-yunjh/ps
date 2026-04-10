@@ -1,5 +1,6 @@
 def solution(numbers, target):
     answer = 0
+    
     leaves = [0]
     for num in numbers:
         tmp = []
@@ -10,4 +11,5 @@ def solution(numbers, target):
     for leaf in leaves:
         if leaf == target:
             answer += 1
+    
     return answer
