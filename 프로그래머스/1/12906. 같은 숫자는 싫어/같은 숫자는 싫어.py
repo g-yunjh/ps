@@ -1,7 +1,10 @@
 def solution(arr):
-    stack = []
-    stack.append(arr[0])
+    st = []
+    st.append(arr[0])
+    
     for i in arr:
-        if (i != stack[-1]):
-            stack.append(i)
-    return stack
+        if i != st[-1]:
+            st.append(i)
+    
+    return st
+            
