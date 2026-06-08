@@ -1,15 +1,22 @@
 from collections import deque
 
 def solution(priorities, location):
-    queue = deque([(p, i) for i, p in enumerate(priorities)])
-    answer = 0
+    q = deque(priorities)
+    cnt = 0
     
-    while queue:
-        curr = queue.popleft()
-        # 현재 프로세스보다 우선순위가 높은 게 하나라도 있는지 확인
-        if any(curr[0] < q[0] for q in queue):
-            queue.append(curr)
+    while True:
+        if q[0] == max(q):
+            cnt += 1
+            if location == 0:
+                return cnt 
+            q.popleft()
+            location -= 1
         else:
-            answer += 1
-            if curr[1] == location:
-                return answer
+            tmp = q[0]
+            q.append(tmp)
+            q.popleft()
+            location -= 1
+            if location < 0:
+                location = len(q) + location
+        
+        
