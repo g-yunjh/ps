@@ -1,4 +1,10 @@
+from collections import Counter
+
 def solution(nums):
-    choose = len(nums) // 2
-    kinds = len(set(nums))
-    return min(choose, kinds)
+    n = len(nums) / 2
+    nums = Counter(nums)
+    
+    if len(nums) >= n:
+        return n
+    else:
+        return len(nums)
