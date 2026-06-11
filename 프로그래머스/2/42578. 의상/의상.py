@@ -1,8 +1,13 @@
-from collections import Counter
-
 def solution(clothes):
-    counts = Counter([kind for name, kind in clothes])
-    answer = 1
-    for count in counts.values():
-        answer *= (count + 1)
-    return answer - 1
+    m = {}
+    
+    for c in clothes:
+        if c[1] in m:
+            m[c[1]] += 1
+        else:
+            m[c[1]] = 2
+    
+    ans = 1
+    for i in m.items():
+        ans *= i[1]
+    return ans - 1
