@@ -1,23 +1,29 @@
 import heapq
 
 def solution(jobs):
-    jobs.sort() # 요청 시간 순으로 정렬
-    n = len(jobs)
-    time, i, answer = 0, 0, 0
-    wait_list = [] # 처리 대기 중인 작업을 담는 힙
+    answer = 0
+    start = -1          # 바로 이전에 완료된 작업의 종료 시간
+    now = 0             # 현재 시간
+    i = 0               # 처리 완료된 작업의 개수
+    heap = []           # 현재 대기 중인 작업들을 담을 우선순위 큐
     
-    while i < n or wait_list:
-        # 현재 시간 이전에 요청된 모든 작업을 힙에 삽입
-        while i < n and jobs[i][0] <= time:
-            heapq.heappush(wait_list, (jobs[i][1], jobs[i][0])) # (소요시간, 요청시간)
-            i += 1
-            
-        if wait_list:
-            duration, start = heapq.heappop(wait_list)
-            time += duration
-            answer += (time - start)
+    # 모든 작업을 처리할 때까지 반복
+    while i < len(jobs):
+        # 1. 현재 시점(now)까지 요청된 모든 작업을 힙에 삽입
+        for job in jobs:
+            if start < job[0] <= now:
+                # 힙은 첫 번째 원소를 기준으로 정렬하므로 (소요시간, 요청시간) 순으로 넣음
+                heapq.heappush(heap, [job[1], job[0]])
+        
+        # 2. 대기 중인 작업이 있는 경우
+        if len(heap) > 0:
+            current = heapq.heappop(heap)
+            start = now
+            now += current[0]  # 현재 시간에 소요 시간을 더함
+            answer += (now - current[1]) # (종료시간 - 요청시간)을 누적
+            i += 1             # 처리된 작업 개수 증가
         else:
-            # 처리할 작업이 없으면 다음 작업 요청 시간으로 점프
-            time = jobs[i][0]
+            # 3. 대기 중인 작업이 없다면 시간이 흘러야 함 (다음 작업의 요청 시간으로 점프)
+            now += 1
             
-    return answer // n
+    return answer // len(jobs)
