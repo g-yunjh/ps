@@ -1,7 +1,16 @@
 def solution(numbers):
-    arr = []
-    for number in numbers:
-        arr.append(str(number))
-    arr.sort(key = lambda x: x*3, reverse = True)
+    arr0 = []
+    for n in numbers:
+        arr0.append(str(n) * 3)
+    arr0.sort(reverse = True)
     
-    return str(int("".join(arr)))
+    arr1 = []
+    for i in arr0:
+        arr1.append(i[:len(i)//3])
+    
+    ans = "".join(arr1)
+    if ans[0] == "0":
+        return str(int(ans))
+    else:
+        return ans    
+        
