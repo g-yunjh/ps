@@ -1,11 +1,9 @@
 def solution(sizes):
-    ga = 0
-    se = 0
-    for size in sizes:
-        size.sort()
-        if ga < size[0]:
-            ga = size[0]
-        if se < size[1]:
-            se = size[1]
-        
-    return ga * se
+    x = []
+    y = []
+    for s in sizes:
+        s.sort()
+        x.append(s[0])
+        y.append(s[1])
+    return max(x) * max(y)
+    
