@@ -1,17 +1,14 @@
 def solution(citations):
-    citations.sort(reverse = True)
-    h = citations[0]
+    citations.sort()
+    cnt = len(citations)
+    
+    h = citations[-1]
+    c = citations.index(h)
     while True:
-        up = 0
-        for citation in citations:
-            if citation >= h:
-                up += 1
-            else:
-                break
-        if (up >= h) and (len(citations) - up <= h):
+        if cnt - c >= h:
             return h
+        elif (h - 1) in citations:
+            h -= 1
+            c = citations.index(h)
         else:
             h -= 1
-        
-            
-        
