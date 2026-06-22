@@ -1,7 +1,6 @@
 def solution(brown, yellow):
-    total = brown + yellow
-    for w in range(3, total // 3 + 1):
-        if total % w == 0:
-            h = total // w
-            if (w - 2) * (h - 2) == yellow:
-                return [max(w,h), min(w, h)]
+    x = 1
+    while True:
+        if yellow % x  == 0 and (x+2)*2 + (yellow/x)*2 == brown:
+            return yellow/x+2, x+2
+        x += 1
