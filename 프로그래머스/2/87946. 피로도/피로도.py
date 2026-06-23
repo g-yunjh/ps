@@ -1,19 +1,19 @@
 from itertools import permutations
-
 def solution(k, dungeons):
-    max_num = 0
-    iter = []
-    for i in range(len(dungeons)):
-        iter.append(i)
-    for i in permutations(iter):
-        cnt = 0
+    arr = permutations(dungeons, len(dungeons))
+    arr = list(arr)
+    max_cnt = 0
+    for i in arr:
         h = k
+        cnt = 0
         for j in i:
-            if h >= dungeons[j][0]:
-                h -= dungeons[j][1]
+            if j[0] > h:
+                break
+            else:
+                h -= j[1]
                 cnt += 1
-        if cnt > max_num:
-            max_num = cnt
+        if cnt > max_cnt:
+            max_cnt = cnt
+    return max_cnt
+        
     
-    return max_num
-       
