@@ -1,32 +1,23 @@
 def solution(n, lost, reserve):
-    answer = 0
-    
-    # solution
-    dual = []
-    temp = []
+    arr = [1]*(n+2)
+    arr[0] = 0
+    arr[-1] = 0
     for i in lost:
-        if i in reserve:
-            dual.append(i)
-        else:
-            temp.append(i)
-
-    dual.sort()
-    temp.sort()
-    lost = dual + temp
+        arr[i] -= 1
+    for i in reserve:
+        arr[i] += 1
+    for i in range(1, n+1):
+        if arr[i] == 0:
+            if arr[i-1] > 1:
+                arr[i-1] -= 1
+                arr[i] += 1
+            elif arr[i+1] > 1:
+                arr[i+1] -= 1
+                arr[i] += 1
+    cnt = 0
+    for i in arr:
+        if i > 0:
+            cnt += 1
+    return cnt
+            
         
-    
-    arr = []
-    for i in lost:
-        if i in reserve:
-            reserve.remove(i)
-            arr.append(i)
-        elif i - 1 in reserve:
-            reserve.remove(i - 1)
-            arr.append(i)
-        elif i + 1 in reserve:
-            reserve.remove(i + 1)
-            arr.append(i)
-        
-    answer = n - len(lost) + len(arr)
-
-    return answer
