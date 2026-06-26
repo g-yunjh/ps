@@ -1,14 +1,15 @@
 def solution(people, limit):
     people.sort(reverse = True)
-    heavy = 0
-    light = len(people) - 1
-    ans = 0
-    while heavy <= light:
-        if people[heavy] + people[light] <= limit:
-            ans += 1
-            heavy += 1
-            light -= 1
+    l = len(people) - 1
+    h = 0
+    cnt = 0
+    while h <= l:
+        if people[h] + people[l] <= limit:
+            cnt += 1
+            h += 1
+            l -= 1
         else:
-            ans += 1
-            heavy += 1
-    return ans
+            cnt += 1
+            h += 1
+    return cnt
+        
