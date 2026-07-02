@@ -1,24 +1,25 @@
 def solution(N, number):
     if N == number:
         return 1
+        
+    dp = [set() for _ in range(9)]
     
-    answer = -1
-    arr = [set() for _ in range(8)]
-    
-    for i in range(len(arr)):
-        arr[i].add(int(str(N)*(i+1)))
-    
-    for i in range(1,8):
-        for j in range(i):
-            for op1 in arr[j]:
-                for op2 in arr[i-j-1]:
-                    arr[i].add(op1+op2)
-                    arr[i].add(op1-op2)
-                    arr[i].add(op1*op2)
+    for i in range(1, 9):
+        dp[i].add(int(str(N) * i))
+        
+    # 1개부터 8개까지 N을 사용하는 경우를 계산
+    for i in range(1, 9):
+        for j in range(1, i):
+            for op1 in dp[j]:
+                for op2 in dp[i - j]:
+                    dp[i].add(op1 + op2)
+                    dp[i].add(op1 - op2)
+                    dp[i].add(op1 * op2)
                     if op2 != 0:
-                        arr[i].add(op1//op2)
-        if number in arr[i]:
-            answer = i+1
-            break
-    
-    return answer
+                        dp[i].add(op1 // op2)
+        
+        if number in dp[i]:
+            return i
+            
+    # N을 8번 이하로 사용해서 표현할 수 없는 경우
+    return -1
