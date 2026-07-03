@@ -1,15 +1,9 @@
 def solution(numbers, target):
-    answer = 0
-    
-    leaves = [0]
-    for num in numbers:
-        tmp = []
-        for parent in leaves:
-            tmp.append(parent + num)
-            tmp.append(parent - num)
-        leaves = tmp
-    for leaf in leaves:
-        if leaf == target:
-            answer += 1
-    
-    return answer
+    arr = [[] for i in range(len(numbers))]
+    arr[0].extend([-numbers[0], numbers[0]])
+    for i in range(1, len(numbers)):
+        for j in arr[i-1]:
+            arr[i].append(j-numbers[i])
+            arr[i].append(j+numbers[i])
+    return arr[-1].count(target)
+
