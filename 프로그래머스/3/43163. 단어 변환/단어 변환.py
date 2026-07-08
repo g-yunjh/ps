@@ -1,25 +1,38 @@
 from collections import deque
 
-def dif(n, m):
-    cnt = 0
-    for i in range(len(n)):
-        if n[i] != m[i]:
-            cnt += 1
-    if cnt == 1:
-        return True
-    else:
-        return False
-
 def solution(begin, target, words):
-    queue = deque()
-    queue.append([begin])
-    while queue:
-        i = queue.popleft()
-        for word in words:
-            if word not in i:
-                if dif(i[-1], word):
-                    if word == target:
-                        return len(i)
-                    else:
-                        queue.append(i + [word])
+    l = len(words[0])
+    q = deque()
+    for w in words:
+        c = 0
+        for i in range(l):
+            if begin[i] != w[i]:
+                c += 1
+            if c > 1:
+                break
+        if c == 1:
+            q.append([w, 1])
+    if len(q) == 0:
+        return 0
+    for i in q:
+        if i[0] in words:
+            words.remove(i[0])
+    
+    while len(q) > 0:
+        if q[0][0] == target:
+            return q[0][1]
+        for w in words:
+            c = 0
+            for i in range(l):
+                if q[0][0][i] != w[i]:
+                    c += 1
+                if c > 1:
+                    break
+            if c == 1:
+                q.append([w,q[0][1] + 1])
+        for i in q:
+            if i[0] in words:
+                words.remove(i[0])
+        q.popleft()
+    
     return 0
