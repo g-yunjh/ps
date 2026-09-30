@@ -1,0 +1,6 @@
+select BOOK_ID, AUTHOR_NAME, PUBLISHED_DATE
+from BOOK t1
+inner join AUTHOR t2
+on t1.AUTHOR_ID = t2.AUTHOR_ID
+where CATEGORY = '경제'
+order by PUBLISHED_DATE;
