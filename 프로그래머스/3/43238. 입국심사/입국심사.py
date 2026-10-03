@@ -1,19 +1,18 @@
 def solution(n, times):
     ans = 0
-    
     left = 1
-    right = n * max(times)
+    right = max(times) * n
     
     while left <= right:
-        mid = (left + right)//2
+        mid = (left + right) // 2
         cnt = 0
-        
-        for time in times:
-            cnt += mid // time
-        
+        for t in times:
+            cnt += mid // t
         if cnt >= n:
+            right = mid - 1
             ans = mid
-            right = mid -1
         else:
             left = mid + 1
+    
     return ans
+    
