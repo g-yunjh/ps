@@ -1,19 +1,20 @@
 def solution(number, k):
-    st = []
-    n = list(number)
-    st.append(n[0])
-    cnt = k
+    st = [number[0]]
     i = 1
-    while cnt > 0 and i < len(n):
-        if len(st) > 0 and st[-1] < n[i]:
+    while k > 0 and i < len(number):
+        while k > 0:
+            if len(st) == 0 or int(st[-1]) >= int(number[i]):
+                st.append(number[i])
+                i += 1
+                break
+            else:
+                st.pop()
+                k -= 1
+    if i < len(number):
+        for i in range(i, len(number)):
+            st.append(number[i])
+    if k > 0:
+        for i in range(k):
             st.pop()
-            cnt -= 1
-        else:
-            st.append(n[i])
-            i += 1
-    if cnt > 0:
-        st = st[:-cnt]
-    if i < len(n):
-        st.extend(n[i:])
     return "".join(st)
         
