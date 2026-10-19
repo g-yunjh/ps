@@ -1,10 +1,9 @@
-from collections import Counter
-
 def solution(nums):
-    n = len(nums) / 2
-    nums = Counter(nums)
+    n = len(nums)
+    k = len(set(nums))
     
-    if len(nums) >= n:
-        return n
+    if k > n / 2:
+        return n//2
     else:
-        return len(nums)
+        return k
+    
