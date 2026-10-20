@@ -1,32 +1,24 @@
 def solution(genres, plays):
-    arr = []
-    for i in range(len(genres)):
-        arr.append([genres[i], plays[i], i])
-    
-    m = {}
-    for i in arr:
-        if i[0] in m:
-            m[i[0]] += i[1]
+    g = {}
+    for i in range(len(plays)):
+        if genres[i] in g:
+            g[genres[i]] += plays[i]
         else:
-            m[i[0]] = i[1]
-    m = sorted(m.items(), key = lambda x: x[1], reverse = True)
-
-    t0 = []
-    for i in m:
-        tmp = []
-        for j in arr:
-            if j[0] == i[0]:
-                tmp.append(j[1:])
-        t0.append(tmp)
+            g[genres[i]] = plays[i]
+    g = sorted(g.items(), key = lambda x: -x[1])
+    arr = []
+    for i in g:
+        tmp  = []
+        for j in range(len(plays)):
+            if genres[j] == i[0]:
+                tmp.append([plays[j], j])
+        arr.append(tmp)
     
-    ans = []
-    for i in t0:
-        i.sort(key = lambda x: (-x[0], x[1]))
-        cnt = 0
-        for j in i:
-            if cnt < 2:
-                ans.append(j[1])
-                cnt += 1
-    return ans
-        
-            
+    result = []
+    for a in arr:
+        a.sort(key = lambda x: -x[0])
+        for i in range(len(a)):
+            if i > 1:
+                break
+            result.append(a[i][1])
+    return result
