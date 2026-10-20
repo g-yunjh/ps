@@ -1,13 +1,13 @@
 def solution(clothes):
-    m = {}
+    d = {}
     
     for c in clothes:
-        if c[1] in m:
-            m[c[1]] += 1
+        if c[1] in d:
+            d[c[1]] += 1
         else:
-            m[c[1]] = 2
+            d[c[1]] = 1
     
-    ans = 1
-    for i in m.items():
-        ans *= i[1]
-    return ans - 1
+    cnt = 1
+    for i in d:
+        cnt *= d[i] + 1
+    return cnt - 1
