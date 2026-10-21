@@ -1,21 +1,24 @@
 from collections import deque
 
 def solution(progresses, speeds):
-    q = deque(progresses)
-    s = deque(speeds)
-    arr = []
     cnt = 0
-    while q:
-        if q[0] >= 100:
-            q.popleft()
-            s.popleft()
-            cnt += 1
-        elif cnt > 0:
-            arr.append(cnt)
-            cnt = 0
-        else:
-            for i in range(len(q)):
-                q[i] += s[i]    
-    arr.append(cnt)
-    return arr
-            
+    p = deque(progresses)
+    s = deque(speeds)
+    ans = []
+    while len(p) != 0:
+        cnt += 1
+        tmp = 0
+        if p[0] + s[0] * cnt >= 100:
+            while p[0] + s[0] * cnt >= 100:
+                p.popleft()
+                s.popleft()
+                tmp += 1
+                if len(p) == 0:
+                    break
+        if tmp != 0:
+            ans.append(tmp)
+    return ans
+                
+        
+        
+        
