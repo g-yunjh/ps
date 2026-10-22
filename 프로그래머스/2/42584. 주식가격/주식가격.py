@@ -1,21 +1,15 @@
 def solution(prices):
-    arr = []
-    arr.append([prices[0], 0])
+    st = []
     ans = [0] * len(prices)
     
-    for i in range(1, len(prices)):
-        while len(arr) > 0:
-            if prices[i] < arr[-1][0]:
-                ans[arr[-1][1]] = i - arr[-1][1]
-                arr.pop()
-            else:
-                break
-        arr.append([prices[i], i])
-    
-    for i in arr:
-        ans[i[1]] = len(prices) - i[1] - 1
-    
+    for i in range(len(prices)):
+        while st and st[-1][0] > prices[i]:
+            ans[st[-1][1]] = i - st[-1][1]
+            st.pop()
+        st.append([prices[i], i])
+        
+    for i in range(len(ans)):
+        if ans[i] == 0:
+            ans[i] = len(ans) - i - 1
     return ans
-        
-        
-        
+            
