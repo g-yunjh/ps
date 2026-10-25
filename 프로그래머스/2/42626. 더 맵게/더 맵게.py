@@ -1,15 +1,17 @@
 import heapq
 
-def solution(s, k):
-    heapq.heapify(s)
-    
+def solution(scoville, K):
+    heapq.heapify(scoville)
     cnt = 0
-    while s[0] < k:
-        if len(s) == 1:
-            return -1
-        
-        t0 = heapq.heappop(s)
-        t1 = heapq.heappop(s)
-        heapq.heappush(s, t0 + t1 * 2)
+    while scoville[0] < K and len(scoville) > 1:
+        a = heapq.heappop(scoville)
+        b = heapq.heappop(scoville)
+        heapq.heappush(scoville, a + b * 2)
         cnt += 1
-    return cnt
+    if scoville[0] < K:
+        return -1
+    else:
+        return cnt
+    
+        
+        
